@@ -20,7 +20,6 @@ const createExpense = async (payload: CreatePayload): Promise<IExpense> => {
 };
 
 const getAllExpenses = async (): Promise<IExpense[]> => {
-  // Exclude soft-deleted if you want; here we filter them out
   const docs = await Expense.find({ isDeleted: false }).sort({
     date: -1,
     createdAt: -1,
@@ -46,10 +45,6 @@ const updateExpense = async (
 };
 
 const deleteExpense = async (id: string): Promise<void> => {
-  // Hard delete alternative:
-  // const res = await Expense.findByIdAndDelete(id);
-
-  // Soft delete (safer for audit):
   const doc = await Expense.findOneAndUpdate(
     { _id: id, isDeleted: false },
     { isDeleted: true, deletedAt: new Date() },

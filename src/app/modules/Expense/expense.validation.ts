@@ -6,7 +6,6 @@ export const createExpenseValidation = z.object({
     .number({ invalid_type_error: 'Amount must be a number' })
     .positive('Amount must be greater than 0'),
   category: z.string().trim().optional(),
-  // Expect ISO date string; convert later in service/model
   date: z
     .string()
     .datetime()

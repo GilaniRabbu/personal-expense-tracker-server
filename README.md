@@ -9,7 +9,7 @@ A simple RESTful API for managing personal expenses. Users can add, view, update
 - **Add Expense:** Create a new expense with title, amount, category, and date.
 - **View Expenses:** Fetch all expenses (excluding deleted ones).
 - **Edit Expense:** Update any field of an existing expense.
-- **Delete Expense:** Soft-delete an expense (for audit safety).
+- **Delete Expense:** Delete an expense.
 
 ---
 
@@ -70,5 +70,4 @@ A simple RESTful API for managing personal expenses. Users can add, view, update
 ## Notes
 
 - All endpoints return a consistent JSON response structure.
-- Soft delete is used for expenses (they are not removed from the database).
 - Validation errors and API errors are handled gracefully.
