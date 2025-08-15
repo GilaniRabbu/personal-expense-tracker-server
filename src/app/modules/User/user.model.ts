@@ -2,38 +2,27 @@ import { Schema, model } from 'mongoose';
 
 const UserSchema = new Schema(
   {
-    firstName: { type: String, required: true },
-    lastName: { type: String, required: true },
+    firstName: { type: String, required: true, trim: true },
+    lastName: { type: String, required: true, trim: true },
     phone: { type: String, unique: true, required: true },
+    email: { type: String, unique: true, sparse: true, trim: true },
+    password: { type: String, required: true },
     role: {
       type: String,
-      enum: ['SUPER_ADMIN', 'ADMIN', 'USER', 'CUSTOMER', 'DINMAJUR'],
+      enum: ['ADMIN', 'USER'],
       required: true,
       default: 'USER',
     },
-    username: { type: String, unique: true, sparse: true },
-    email: { type: String, unique: true, sparse: true },
     userStatus: {
       type: String,
       enum: ['ACTIVE', 'INACTIVE', 'BLOCKED', 'PENDING', 'DELETED'],
-      default: 'PENDING',
+      default: 'ACTIVE',
     },
-    password: { type: String, required: true },
-    isEmailVerified: { type: Boolean, default: false },
-    isPhoneVerified: { type: Boolean, default: false },
-    refreshToken: { type: String },
-    refreshTokenExpiry: { type: Date },
-    otp: { type: Number },
-    otpExpiry: { type: Date },
-    otpToken: { type: String },
-    dateOfBirth: { type: Date },
     isDeleted: { type: Boolean, default: false },
     deletedAt: { type: Date },
   },
   {
     timestamps: true,
-    toJSON: { virtuals: true },
-    toObject: { virtuals: true },
   }
 );
 
