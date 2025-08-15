@@ -1,6 +1,6 @@
 import httpStatus from 'http-status';
 import ApiError from '../../../errors/ApiErrors';
-import Expense, { IExpense } from './expense.model';
+import Expense from './expense.model';
 
 type CreatePayload = {
   title: string;
@@ -11,7 +11,7 @@ type CreatePayload = {
 
 type UpdatePayload = Partial<Omit<CreatePayload, 'date'> & { date: string }>;
 
-const createExpense = async (payload: CreatePayload): Promise<IExpense> => {
+const createExpense = async (payload: CreatePayload): Promise<any> => {
   const doc = await Expense.create({
     ...payload,
     date: new Date(payload.date),
@@ -19,7 +19,7 @@ const createExpense = async (payload: CreatePayload): Promise<IExpense> => {
   return doc;
 };
 
-const getAllExpenses = async (): Promise<IExpense[]> => {
+const getAllExpenses = async (): Promise<any[]> => {
   const docs = await Expense.find({ isDeleted: false }).sort({
     date: -1,
     createdAt: -1,
@@ -30,7 +30,7 @@ const getAllExpenses = async (): Promise<IExpense[]> => {
 const updateExpense = async (
   id: string,
   payload: UpdatePayload
-): Promise<IExpense> => {
+): Promise<any> => {
   const updates: any = { ...payload };
   if (payload.date) updates.date = new Date(payload.date);
 
