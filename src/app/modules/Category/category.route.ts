@@ -18,4 +18,4 @@ router.patch('/:id', CategoryController.updateCategory);
 // ✅ Delete category
 router.delete('/:id', CategoryController.deleteCategory);
 
-export const CategoryRoutes = router;
+export const CategoryRoute = router;
