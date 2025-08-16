@@ -41,6 +41,15 @@ const getAllExpenses = async (): Promise<any[]> => {
   return docs;
 };
 
+const getExpensesByCategory = async (categoryId: string): Promise<any[]> => {
+  const expenses = await Expense.find({
+    category: categoryId,
+    isDeleted: false,
+  }).populate('category', 'name');
+
+  return expenses;
+};
+
 const updateExpense = async (
   id: string,
   payload: UpdatePayload
@@ -73,6 +82,7 @@ const deleteExpense = async (id: string): Promise<void> => {
 export const ExpenseService = {
   createExpense,
   getAllExpenses,
+  getExpensesByCategory,
   updateExpense,
   deleteExpense,
 };

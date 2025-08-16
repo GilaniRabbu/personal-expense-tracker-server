@@ -24,6 +24,21 @@ const getAllExpenses = catchAsync(async (_req: Request, res: Response) => {
   });
 });
 
+export const getExpensesByCategory = catchAsync(
+  async (req: Request, res: Response) => {
+    const { categoryId } = req.params;
+
+    const result = await ExpenseService.getExpensesByCategory(categoryId);
+
+    sendResponse(res, {
+      statusCode: httpStatus.OK,
+      success: true,
+      message: 'Expenses fetched by category successfully',
+      data: result,
+    });
+  }
+);
+
 const updateExpense = catchAsync(async (req: Request, res: Response) => {
   const result = await ExpenseService.updateExpense(req.params.id, req.body);
   sendResponse(res, {
@@ -47,6 +62,7 @@ const deleteExpense = catchAsync(async (req: Request, res: Response) => {
 const ExpenseController = {
   createExpense,
   getAllExpenses,
+  getExpensesByCategory,
   updateExpense,
   deleteExpense,
 };
