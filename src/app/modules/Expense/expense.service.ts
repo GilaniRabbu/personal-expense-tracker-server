@@ -51,17 +51,6 @@ const updateExpense = async (
     updates.date = new Date(payload.date);
   }
 
-  // ✅ Validate category if updating
-  if (payload.category) {
-    const category = await Category.findOne({
-      _id: payload.category,
-      isDeleted: false,
-    });
-    if (!category) {
-      throw new ApiError(httpStatus.BAD_REQUEST, 'Invalid category');
-    }
-  }
-
   const doc = await Expense.findOneAndUpdate(
     { _id: id, isDeleted: false },
     updates,

@@ -11,9 +11,6 @@ const CategorySchema = new Schema(
   }
 );
 
-// Indexes
-CategorySchema.index({ name: 1 });
-
 const Category = model('Category', CategorySchema);
 
 export default Category;
