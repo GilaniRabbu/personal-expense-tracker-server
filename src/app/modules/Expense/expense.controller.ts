@@ -44,9 +44,11 @@ const deleteExpense = catchAsync(async (req: Request, res: Response) => {
   });
 });
 
-export default {
+const ExpenseController = {
   createExpense,
   getAllExpenses,
   updateExpense,
   deleteExpense,
 };
+
+export default ExpenseController;
