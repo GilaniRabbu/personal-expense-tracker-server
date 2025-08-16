@@ -25,8 +25,11 @@ const createCategory = async (payload: { name: string }) => {
 };
 
 const getAllCategories = async () => {
-  const categories = await Category.find();
-  return categories;
+  const categories = await Category.find().lean();
+  return categories.map((cat) => ({
+    id: cat._id.toString(),
+    name: cat.name,
+  }));
 };
 
 const getCategoryById = async (id: string) => {
